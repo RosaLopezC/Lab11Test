@@ -36,4 +36,30 @@ public class VetServiceTest {
 
         log.info("Test de creación de veterinario pasado correctamente.");
     }
+
+    @Test
+    public void testBuscarVetPorId() {
+        Vet vet = new Vet();
+        vet.setNombre("Carlos");
+        vet.setApellido("Gonzalez");
+        vet.setNumeroLicencia("LIC12345");
+        vet.setEspecialidad("Cirugía");
+
+
+        Vet savedVet = vetService.save(vet);
+
+
+        Vet foundVet = vetService.findById(savedVet.getId()).orElse(null);
+
+
+        assertNotNull(foundVet, "El veterinario no debería ser nulo");
+        assertEquals("Carlos", foundVet.getNombre());
+        assertEquals("Gonzalez", foundVet.getApellido());
+        assertEquals("LIC12345", foundVet.getNumeroLicencia());
+        assertEquals("Cirugía", foundVet.getEspecialidad());
+
+
+        log.info("Test de búsqueda de veterinario pasado correctamente.");
+    }
+
 }
